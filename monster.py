@@ -1,5 +1,4 @@
 import abc
-import numpy as np
 from itertools import cycle
 
 
@@ -16,6 +15,8 @@ class Monster(object, metaclass=abc.ABCMeta):
         step_x, step_y = (next(self.jump_pattern))
         self.x += step_x
         self.y += step_y
+        self.x %= self.grid_w
+        self.y %= self.grid_h
 
     def jump(self):
         for _ in range(self.jump_size):

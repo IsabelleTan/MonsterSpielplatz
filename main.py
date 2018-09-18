@@ -1,5 +1,3 @@
-import numpy as np
-
 from monster import *
 
 grid_w = 21
