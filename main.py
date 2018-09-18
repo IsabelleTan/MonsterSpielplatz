@@ -1,19 +1,10 @@
 from monster import *
+from grid import *
 
 grid_w = 21
 grid_h = 21
 
-monsters = [
-    Erdbeerli(0, 0, grid_w, grid_h),
-    Pirati(0, 0, grid_w, grid_h),
-    Brummi(0, 0, grid_w, grid_h),
-    Fressi(0, 0, grid_w, grid_h),
-    Glubschi(0, 0, grid_w, grid_h),
-    Keksi(0, 0, grid_w, grid_h)]
-
-for monster in monsters:
-    monster.jump()
-    print(monster)
+grid = Grid(grid_w, grid_h)
 
 # All monster coordinates for Monsterspielplatz 1
 erdbeerlis = [(5, 15), (7, 15), (14, 15),
@@ -44,3 +35,25 @@ keksis = [(5, 2), (6, 2), (19, 2), (7, 3),
           (0, 10), (18, 10), (7, 11), (12, 11),
           (4, 12), (19, 12), (3, 14), (13, 14),
           (15, 14), (15, 16)]
+
+monsters = []
+
+for erdbeerli in erdbeerlis:
+    monsters.append(Erdbeerli(*erdbeerli, grid_w, grid_h))
+for pirati in piratis:
+    monsters.append(Pirati(*pirati, grid_w, grid_h))
+for brummi in brummis:
+    monsters.append(Brummi(*brummi, grid_w, grid_h))
+for fressi in fressis:
+    monsters.append(Fressi(*fressi, grid_w, grid_h))
+for glubschi in glubschis:
+    monsters.append(Glubschi(*glubschi, grid_w, grid_h))
+for keksi in keksis:
+    monsters.append(Keksi(*keksi, grid_w, grid_h))
+
+for monster in monsters:
+    for _ in range(10):
+        monster.jump()
+    grid.add_monster(monster)
+
+print(grid)
