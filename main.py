@@ -14,8 +14,7 @@ monsters = [
     Keksi(0, 0, grid_w, grid_h)]
 
 for monster in monsters:
-    for _ in range(3):
-        monster.step()
+    monster.jump()
     print(monster)
 
 # All monster coordinates for Monsterspielplatz 1
