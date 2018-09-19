@@ -31,7 +31,8 @@ class Monster(object, metaclass=abc.ABCMeta):
         self.jump_pattern = cycle(jump)
 
     def __str__(self):
-        return "x: {}, y: {}. Grid width: {}, grid height: {}".format(self.x, self.y, self.grid_w, self.grid_h)
+        return "x: {}, y: {}. Grid width: {}, grid height: {}"\
+                .format(self.x, self.y, self.grid_w, self.grid_h)
 
 
 class Erdbeerli(Monster):

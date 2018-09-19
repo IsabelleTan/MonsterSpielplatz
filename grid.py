@@ -5,12 +5,15 @@ class Grid(object):
         self.grid = [
             ['.' for _ in range(self.height)]
             for _ in range(self.width)]
+        self.monsters = []
 
     def add_monster(self, monster):
-        x, y = monster.get_location()
-        self.grid[20 - y][x] = 'X'
+        self.monsters.append(monster)
 
     def __str__(self):
-        return '\n'.join([''.join(['{}'.format(item) \
+        for monster in self.monsters:
+            x, y = monster.get_location()
+            self.grid[20 - y][x] = monster.__class__.__name__[0]
+        return '\n'.join([' '.join(['{}'.format(item) \
                                    for item in row]) \
                                    for row in self.grid])
