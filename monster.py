@@ -38,33 +38,33 @@ class Monster(object, metaclass=abc.ABCMeta):
 class Erdbeerli(Monster):
     def __init__(self, x, y, grid_w, grid_h):
         super().__init__(x, y, grid_w, grid_h)
-        self.set_jump(((1, 2), (1, -2), (1, 0)))
+        self.set_jump(((-1, 1), (2, 2), (-2, 0)))
 
 
 class Pirati(Monster):
     def __init__(self, x, y, grid_w, grid_h):
         super().__init__(x, y, grid_w, grid_h)
-        self.set_jump(((1, 2), (1, -1), (1, 2)))
+        self.set_jump(((1, -2), (1, 2), (1, 0)))
 
 
 class Brummi(Monster):
     def __init__(self, x, y, grid_w, grid_h):
         super().__init__(x, y, grid_w, grid_h)
-        self.set_jump(((-1, -2), (3, 1), (-1, -1)))
+        self.set_jump(((1, -2), (-2, 1), (-1, -1)))
 
 
 class Fressi(Monster):
     def __init__(self, x, y, grid_w, grid_h):
         super().__init__(x, y, grid_w, grid_h)
-        self.set_jump(((-1, 1), (-1, -2), (-1, 3)))
+        self.set_jump(((0, 2), (1, -2), (1, -1)))
 
 
 class Glubschi(Monster):
     def __init__(self, x, y, grid_w, grid_h):
         super().__init__(x, y, grid_w, grid_h)
-        self.set_jump(((-1, 1), (0, -3), (-1, 1)))
+        self.set_jump(((-1, -1), (-1, 2), (-1, -1)))
 
 class Keksi(Monster):
     def __init__(self, x, y, grid_w, grid_h):
         super().__init__(x, y, grid_w, grid_h)
-        self.set_jump(((-1, 1), (-1, -2), (-1, 1)))
+        self.set_jump(((1, 1), (1, 0), (1, 1)))
