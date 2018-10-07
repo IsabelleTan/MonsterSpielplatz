@@ -44,27 +44,28 @@ class Erdbeerli(Monster):
 class Pirati(Monster):
     def __init__(self, x, y, grid_w, grid_h):
         super().__init__(x, y, grid_w, grid_h)
-        self.set_jump(((1, -2), (1, 2), (1, 0)))
+        self.set_jump(((1, 1), (-1, 2), (-2, -2)))
 
 
 class Brummi(Monster):
     def __init__(self, x, y, grid_w, grid_h):
         super().__init__(x, y, grid_w, grid_h)
-        self.set_jump(((1, -2), (-2, 1), (-1, -1)))
+        self.set_jump(((4, 2), (4, 0), (1, 0)))
 
 
 class Fressi(Monster):
     def __init__(self, x, y, grid_w, grid_h):
         super().__init__(x, y, grid_w, grid_h)
-        self.set_jump(((0, 2), (1, -2), (1, -1)))
+        self.set_jump(((1, 1), (-4, 0), (-1, -1)))
 
 
 class Glubschi(Monster):
     def __init__(self, x, y, grid_w, grid_h):
         super().__init__(x, y, grid_w, grid_h)
-        self.set_jump(((-1, -1), (-1, 2), (-1, -1)))
+        self.set_jump(((-1, 1), (-2, -1), (2, 0)))
+
 
 class Keksi(Monster):
     def __init__(self, x, y, grid_w, grid_h):
         super().__init__(x, y, grid_w, grid_h)
-        self.set_jump(((1, 1), (1, 0), (1, 1)))
+        self.set_jump(((0, -2), (2, 0), (0, -1)))
