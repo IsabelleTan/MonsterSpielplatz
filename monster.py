@@ -10,6 +10,7 @@ class Monster(object, metaclass=abc.ABCMeta):
         self.grid_h = grid_h
         self.jump_size = 0
         self.jump_pattern = cycle(())
+        self.letters = ''
 
     def step(self):
         step_x, step_y = (next(self.jump_pattern))
@@ -29,6 +30,9 @@ class Monster(object, metaclass=abc.ABCMeta):
     def set_jump(self, jump):
         self.jump_size = len(jump)
         self.jump_pattern = cycle(jump)
+
+    def __lt__(self, other):
+        return (self.x, self.y) < (other.x, other.y)
 
     def __str__(self):
         return "x: {}, y: {}. Grid width: {}, grid height: {}"\
