@@ -5,7 +5,6 @@ from mpl_toolkits.mplot3d import Axes3D
 import object_recognition
 import importlib
 importlib.reload(object_recognition)
-import numpy as np
 from object_recognition import MonsterRecognition
 
 
@@ -94,13 +93,19 @@ from object_recognition import MonsterRecognition
 # print('N:', grid.n_letters)
 # print('E:', grid.e_letters)
 
+def test_monsterspielplatz4(monsters4):
+    assert monsters4[0].__class__.__name__ == 'Keksi', \
+        'First monster should be a Keksi, but is a {}'\
+            .format(monsters4[i].__class__.__name__)
+    assert len(monsters4) == 90, 'Found {} monsters, should be {}'\
+        .format(len(monsters4), 90)
 
+    print('All tests passed!')
 
 m = object_recognition.MonsterRecognition('./monsterspielplatz4_tiny.png')
-m.train_monster_recognition()
+m.train_monster_recognition_model()
+
 monsters = m.find_monsters()
 
-for i, monster in enumerate(monsters):
-    print(monster.__class__.__name__, monster)
-    if i > 20:
-        break
+test_monsterspielplatz4(monsters)
+
