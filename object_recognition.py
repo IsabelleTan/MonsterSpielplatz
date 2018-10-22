@@ -47,7 +47,7 @@ class MonsterRecognition(object):
             for x, number in enumerate(row):
                 if number > 0:
                     self.monsters.append(
-                        self.number_to_monster[number](x, y, 21, 21))
+                        self.number_to_monster[number](x, y))
 
         return self.monsters
 

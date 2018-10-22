@@ -109,3 +109,10 @@ monsters = m.find_monsters()
 
 test_monsterspielplatz4(monsters)
 
+grid = Grid(21, 21, {})
+for monster in monsters:
+    grid.add_monster(monster)
+
+grid.do_jump()
+print(len(grid.monsters))
+

@@ -8,6 +8,7 @@ class Grid(object):
         self.n_letters = ''
 
     def add_monster(self, monster):
+        monster.set_grid_size(self.width, self.height)
         self.monsters.append(monster)
 
     def do_step(self):
