@@ -1,57 +1,106 @@
-from monster import *
 from grid import *
+from monster import *
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+import object_recognition
+import importlib
+importlib.reload(object_recognition)
+import numpy as np
+from object_recognition import MonsterRecognition
 
-grid_w = 21
-grid_h = 21
 
-grid = Grid(grid_w, grid_h)
+# grid_w = 21
+# grid_h = 21
+#
+# letter_grid = {(0, 0): 'H', (7, 0): 'A', (16, 0): 'U', (19, 0): 'W', (2, 1): 'L',
+#                (5, 1): 'S', (17, 1): 'H', (20, 1): 'E', (3, 2): 'S',
+#                (7, 2): 'D',
+#                (19, 2): 'V',
+#                (2, 3): 'B',
+#                (6, 3): 'E',
+#                (18, 3): 'N',
+#                (12, 4): 'F',
+#                (14, 4): 'I',
+#                (19, 4): 'F',
+#                (9, 5): 'S',
+#                (4, 6): 'E',
+#                (11, 6): 'E',
+#                (2, 7): 'F',
+#                (12, 7): 'L',
+#                (17, 7): 'E',
+#                (20, 7): 'N',
+#                (0, 8): 'U',
+#                (6, 8): 'N',
+#                (16, 8): 'I',
+#                (2, 9): 'C',
+#                (5, 9): 'R',
+#                (13, 9): 'E',
+#                (18, 9): 'L',
+#                (4, 10): 'I',
+#                (7, 10): 'Z',
+#                (12, 10): 'U',
+#                (15, 10): 'V',
+#                (20, 10): 'H',
+#                (2, 11): 'F',
+#                (6, 11): 'U',
+#                (8, 11): 'B',
+#                (16, 11): 'S',
+#                (3, 12): 'N',
+#                (9, 12): 'E',
+#                (11, 12): 'C',
+#                (6, 13): 'N',
+#                (14, 13): 'F',
+#                (17, 13): 'U',
+#                (20, 13): 'W',
+#                (1, 14): 'F',
+#                (5, 14): 'A',
+#                (9, 14): 'S',
+#                (16, 14): 'E',
+#                (3, 15): 'D',
+#                (14, 15): 'I',
+#                (20, 15): 'U',
+#                (1, 16): 'E',
+#                (6, 16): 'I',
+#                (13, 16): 'E',
+#                (16, 16): 'V',
+#                (19, 16): 'E',
+#                (3, 17): 'N',
+#                (11, 17): 'U',
+#                (15, 17): 'N',
+#                (18, 17): 'R',
+#                (2, 18): 'E',
+#                (13, 18): 'F',
+#                (19, 18): 'N',
+#                (3, 19): 'C',
+#                (5, 19): 'N',
+#                (17, 19): 'S',
+#                (20, 19): 'L',
+#                (1, 20): 'E',
+#                (7, 20): 'N',
+#                (11, 20): 'R',
+#                (14, 20): 'L',
+#                (19, 20): 'T'
+#                }
+#
+#
+# grid = Grid(grid_w, grid_h, letter_grid)
+#
+#
+# n_iterations = 0
+# while len(grid.letter_grid)>0 and n_iterations < 50:
+#     grid.do_step()
+#     n_iterations+=1
 
-# All monster coordinates for Monsterspielplatz 1
-brummis = [
-    (6, 0), (0, 1), (20, 2), (14, 9), (17, 9), (19, 10), (15, 10), (5, 12),
-    (11, 15), (17, 17), (20, 17), (6, 20),
-]
-erdbeerlis = [
-    (15, 4), (9, 5), (17, 5), (18, 6), (7, 7), (8, 7), (0, 8), (8, 10),
-    (6, 17), (13, 10), (9, 18), (19, 19), (5, 19),
-    ]
-fressis = [
-    (1, 3), (4, 4), (2, 5), (8, 5), (20, 6), (12, 7), (20, 7), (11, 8), (2, 9),
-    (7, 9), (6, 11), (2, 13), (6, 13), (19, 14), (10, 16), (11, 17),
-    ]
-glubschis = [
-    (1, 4), (17, 4), (11, 9), (17, 10), (16, 10), (2, 10), (2, 12), (9, 13),
-    (17, 15), (3, 15), (13, 18)
- ]
-keksis = [
-    (5, 1), (9, 1), (18, 1), (19, 1), (1, 2), (2, 2), (4, 2), (9, 3), (19, 4),
-    (2, 6), (4, 6), (8, 6), (17, 6), (19, 6), (3, 7), (9, 9), (3, 10), (2, 11),
-    (18, 11), (9, 12), (2, 19), (9, 19), (18, 19), (16, 20),
-    ]
-piratis = [
-    (10, 5), (11, 5), (3, 9), (1, 10), (5, 11), (1, 13), (18, 13), (11, 13),
-    (16, 15), (3, 18)
-]
+# print('N:', grid.n_letters)
+# print('E:', grid.e_letters)
 
-monsters = []
 
-for erdbeerli in erdbeerlis:
-    monsters.append(Erdbeerli(*erdbeerli, grid_w, grid_h))
-for pirati in piratis:
-    monsters.append(Pirati(*pirati, grid_w, grid_h))
-for brummi in brummis:
-    monsters.append(Brummi(*brummi, grid_w, grid_h))
-for fressi in fressis:
-    monsters.append(Fressi(*fressi, grid_w, grid_h))
-for glubschi in glubschis:
-    monsters.append(Glubschi(*glubschi, grid_w, grid_h))
-for keksi in keksis:
-    monsters.append(Keksi(*keksi, grid_w, grid_h))
 
-for monster in monsters:
-    grid.add_monster(monster)
+m = object_recognition.MonsterRecognition('./monsterspielplatz4_tiny.png')
+m.train_monster_recognition()
+monsters = m.find_monsters()
 
-for _ in range(7):
-    grid.do_step()
-
-print(grid)
+for i, monster in enumerate(monsters):
+    print(monster.__class__.__name__, monster)
+    if i > 20:
+        break

@@ -35,8 +35,8 @@ class Monster(object, metaclass=abc.ABCMeta):
         return (self.x, self.y) < (other.x, other.y)
 
     def __str__(self):
-        return "x: {}, y: {}. Grid width: {}, grid height: {}"\
-                .format(self.x, self.y, self.grid_w, self.grid_h)
+        return "{} at ({}, {}) in Grid ({}, {})"\
+                .format(__class__.__name__, self.x, self.y, self.grid_w, self.grid_h)
 
 
 class Erdbeerli(Monster):

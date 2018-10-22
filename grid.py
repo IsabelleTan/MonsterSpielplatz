@@ -1,10 +1,11 @@
-import matplotlib.pyplot as plt
-
 class Grid(object):
-    def __init__(self, width, height):
+    def __init__(self, width, height, letter_grid):
         self.width = width
         self.height = height
         self.monsters = []
+        self.letter_grid = letter_grid
+        self.e_letters = ''
+        self.n_letters = ''
 
     def add_monster(self, monster):
         self.monsters.append(monster)
@@ -12,13 +13,20 @@ class Grid(object):
     def do_step(self):
         for monster in self.monsters:
             monster.step()
+            mon_x, mon_y = monster.get_location()
+            letter = self.letter_grid.pop((mon_x, mon_y), '')
+            if monster.__class__.__name__[0] in ['E', 'B', 'G']:
+                self.n_letters += letter
+            else:
+                self.e_letters += letter
 
     def do_jump(self):
         for monster in self.monsters:
             monster.jump()
 
     def plot(self):
-        return None
+        return NotImplemented
+
 
     def __str__(self):
         grid = [
