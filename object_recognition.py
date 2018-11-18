@@ -1,6 +1,9 @@
 from collections import namedtuple
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
-from sklearn.cluster import SpectralClustering, DBSCAN
+from sklearn.cluster import DBSCAN
+from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 import png
 
@@ -24,14 +27,32 @@ class MonsterRecognition(object):
             6: Keksi,
         }
 
+    def get_monsters(self):
+        self.train_monster_recognition_model()
+        self.monsters = self.find_monsters()
+
+        return self.monsters
+
     def train_monster_recognition_model(self):
         """Train the monster recognition clustering model."""
         standarized_data = self.prepare_image_data(
             './monsterspielplatz3_tiny.png')
-        self.model = DBSCAN(eps=0.5, min_samples=5)\
+        self.model = DBSCAN(eps=0.53, min_samples=7)\
             .fit(standarized_data)
 
         return self.model
+
+    def PCA_image(self):
+        standarized_data = self.prepare_image_data(
+            './monsterspielplatz3_tiny.png')
+
+        pca = PCA(n_components=3)
+        X_r = pca.fit(standarized_data).transform(standarized_data)
+
+        print(pca.components_)
+
+        plt.scatter(X_r[:, 0], X_r[:, 1])
+
 
     def find_monsters(self):
         standarized_data = self.prepare_image_data(self.filename)
@@ -63,6 +84,27 @@ class MonsterRecognition(object):
         self.rgb_image = self.convert_rgba_to_rgb()
 
         return self.rgb_image
+
+    def plot_3d(self):
+        if len(self.rgb_image) < 1:
+            self.read_png()
+
+        fig = plt.figure()
+        ax = fig.add_subplot(111, projection='3d')
+
+        x = []
+        y = []
+        z = []
+
+        for row in self.rgb_image:
+            for color in row:
+                x.append(color[0])
+                y.append(color[1])
+                z.append(color[2])
+
+        ax.scatter(x, y, z)
+
+        plt.show()
 
     def convert_rgba_to_rgb(self):
         size = len(self.rgba_image)
